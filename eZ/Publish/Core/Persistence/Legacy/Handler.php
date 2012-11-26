@@ -493,10 +493,12 @@ class Handler implements HandlerInterface
     {
         if ( !isset( $this->contentTypeHandler ) )
         {
-            $this->contentTypeHandler = new TypeHandler(
-                $this->getContentTypeGateway(),
-                new TypeMapper( $this->converterRegistry ),
-                $this->getTypeUpdateHandler()
+            $this->contentTypeHandler = new Content\Type\MemoryCachingHandler(
+                new TypeHandler(
+                    $this->getContentTypeGateway(),
+                    new TypeMapper( $this->converterRegistry ),
+                    $this->getTypeUpdateHandler()
+                )
             );
         }
         return $this->contentTypeHandler;
