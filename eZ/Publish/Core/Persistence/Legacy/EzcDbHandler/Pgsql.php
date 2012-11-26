@@ -45,5 +45,16 @@ class Pgsql extends EzcDbHandler
     {
         return $table . '_s';
     }
+
+    /**
+     * Custom quote identifier method
+     *
+     * @param string $identifier
+     * @return string
+     */
+    protected function quoteIdentifier( $identifier )
+    {
+        return '"' . $identifier . '"';
+    }
 }
 
