@@ -167,7 +167,7 @@ class EzcDbHandler
      * @param string $identifier
      * @return string
      */
-    protected function quoteIdentifier( $identifier )
+    public function quoteIdentifier( $identifier )
     {
         return '`' . $identifier . '`';
     }
