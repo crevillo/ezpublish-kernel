@@ -561,9 +561,6 @@ class Handler implements HandlerInterface
     {
         if ( !isset( $this->languageHandler ) )
         {
-            /**
-             * Caching language handler, not suitable for testing
-             *
             $this->languageHandler = new Content\Language\CachingHandler(
                 new Content\Language\Handler(
                     new Content\Language\Gateway\ExceptionConversion(
@@ -573,14 +570,17 @@ class Handler implements HandlerInterface
                 ),
                 $this->getLanguageCache()
             );
-            */
 
+            /**
+             * Non-Caching language handler, works for testing
+             *
             $this->languageHandler = new Content\Language\Handler(
                 new Content\Language\Gateway\ExceptionConversion(
                     new Content\Language\Gateway\EzcDatabase( $this->dbHandler )
                 ),
                 new LanguageMapper()
             );
+            */
         }
         return $this->languageHandler;
     }
