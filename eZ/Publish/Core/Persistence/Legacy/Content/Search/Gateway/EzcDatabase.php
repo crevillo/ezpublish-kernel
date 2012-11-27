@@ -178,7 +178,6 @@ class EzcDatabase extends Gateway
      */
     protected function getResultCount( Criterion $criterion, array $sort, $translations )
     {
-        // Get full object count
         $query = $this->handler->createSelectQuery();
 
         $query
@@ -217,8 +216,6 @@ class EzcDatabase extends Gateway
      */
     protected function getContentIds( Criterion $criterion, array $sort, $offset, $limit, $translations )
     {
-        // Getting a clean new query, because rebinding query properties does
-        // not work.
         $query = $this->handler->createSelectQuery();
 
         $query->select(
