@@ -888,6 +888,10 @@ class Handler implements HandlerInterface
         try
         {
             $this->dbHandler->rollback();
+
+            // Clear all caches after rollback
+            $this->contentTypeHandler->clearCache();
+            $this->languageHandler->clearCache();
         }
         catch ( ezcDbTransactionException $e )
         {
