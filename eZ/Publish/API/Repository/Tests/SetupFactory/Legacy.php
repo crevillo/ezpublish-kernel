@@ -94,6 +94,7 @@ class Legacy extends SetupFactory
             $this->insertData();
         }
 
+        $this->clearInternalCaches();
         $repository = $this->getServiceContainer()->get( 'inner_repository' );
         $repository->setCurrentUser(
             $repository->getUserService()->loadUser( 14 )
@@ -192,6 +193,20 @@ class Legacy extends SetupFactory
         }
 
         $this->applyStatements( $this->getPostInsertStatements() );
+    }
+
+    /**
+     * CLears internal in memory caches after inserting data circumventing the
+     * API.
+     *
+     * @return void
+     */
+    protected function clearInternalCaches()
+    {
+        $handler = $this->getServiceContainer()->get( 'persistence_handler_legacy' );
+
+        $handler->contentLanguageHandler()->clearCache();
+        $handler->contentTypeHandler()->clearCache();
     }
 
     /**
